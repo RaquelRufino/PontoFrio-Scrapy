@@ -33,7 +33,7 @@ $ scrapy crawl spider_pontofrio -o resultado.json -t json
 - [x] Utilização de logs para sinalizar ocorrências durante o scraping
 
 
-#### Arquivo: [/kabum/spiders/kb.py](..master/PontoFrio-Scrapy/pontofrio/pontoFrio.py)
+#### Arquivo: [pontoFrio.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/spiders/pontoFrio.py)
 ```python 
 # -*- coding: utf-8 -*-
 import scrapy as spider
@@ -114,22 +114,64 @@ class PontofrioSpider(spider.Spider):
         except:pass
 ```
 
-#### Arquivo: [pipelines.py](../master/kabum/pipelines.py)
+#### Arquivo: [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/pipelines.py)
 ```python
 # -*- coding: utf-8 -*-
 
+# -*- coding: utf-8 -*-
+
+# Define your item pipelines here
+#
+# Don't forget to add your pipeline to the ITEM_PIPELINES setting
+# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+
+###########################
+######	EM MOGODB #########
+###########################
+# import pymongo
+#
+# class PontofrioPipeline(object):
+#     collection_name = 'computadores'
+#
+#     def __init__(self, mongo_uri, mongo_db):
+#         self.mongo_uri = mongo_uri
+#         self.mongo_db = mongo_db
+#
+#     @classmethod
+#     def from_crawler(cls, crawler):
+#         return cls(
+#             mongo_uri=crawler.settings.get('MONGODB_URL'),
+#             mongo_db=crawler.settings.get('MONGODB_DB', 'defautlt-test')
+#         )
+#
+#     def open_spider(self, spider):
+#         self.client = pymongo.MongoClient(self.mongo_uri)
+#         self.db = self.client[self.mongo_db]
+#
+#     def close_spider(self, spider):
+#         self.client.close()
+#
+#     def process_item(self, item, spider):
+#         self.db[self.collection_name].insert(dict(item))
+#         return item
+###########################
+
+'''
+	EM RETHINKDB
+'''
+
 import rethinkdb as r
 
-class RethinkdbPipeline(object):
+
+class PontofrioPipeline(object):
 
     conn = None
     rethinkdb_settings = {}
-    
+
     @classmethod
     def from_crawler(cls, crawler):
         settings = crawler.settings
 
-        ## get rethinkdb settings from settings.py
         rethinkdb_settings = settings.get('RETHINKDB', {})
 
         return cls(rethinkdb_settings)
@@ -139,13 +181,12 @@ class RethinkdbPipeline(object):
 
     def open_spider(self, spider):
         if self.rethinkdb_settings:
-            
-            self.table_name = self.rethinkdb_settings['table_name']
+            self.table_name = self.rethinkdb_settings.pop('table_name')
             self.db_name = self.rethinkdb_settings['db']
-            self.conn = r.connect('localhost', 28015)
-            table_list = r.db(self.db_name).table_list().run(self.conn)
-            
-            ## verify if table already exists and creates a table in database              
+            self.conn = r.connect(**self.rethinkdb_settings)
+            table_list = r.db(self.db_name).table_list().run(
+                self.conn
+            )
             if self.table_name not in table_list:
                 r.db(self.db_name).table_create(self.table_name).run(self.conn)
 
@@ -155,15 +196,15 @@ class RethinkdbPipeline(object):
 
     def process_item(self, item, spider):
         if self.conn:
-            r.db(self.db_name).table(self.table_name).insert(item).run(self.conn)
-        return item 
+            r.table(self.table_name).insert(item).run(self.conn)
+        return item
 ```
 
-#### Arquivo: [/kabum/settings.py](../master/kabum/settings.py)
+#### Arquivo: [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/settings.py)
 ```python
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for kabum project
+# Scrapy settings for pontofrio project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -171,44 +212,54 @@ class RethinkdbPipeline(object):
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+#
+
+'''
+PARA O RETHINKDB
+''' 
 
 
-BOT_NAME = 'kabum'
+BOT_NAME = 'pontofrio'
 
-SPIDER_MODULES = ['kabum.spiders']
-NEWSPIDER_MODULE = 'kabum.spiders'
+SPIDER_MODULES = ['pontofrio.spiders']
+NEWSPIDER_MODULE = 'pontofrio.spiders'
 
-RETHINKDB = {
-    'table_name': 'computers', 'db': 'kabum'
-}
+RETHINKDB = { 'table_name': 'items', 'db': 'banco_ponto_frio' }
+ITEM_PIPELINES = { 'pontofrio.pipelines.PontofrioPipeline'}
 
-ITEM_PIPELINES = {
-    'kabum.pipelines.RethinkdbPipeline': 1
-}
+
+###########################
+######	PARA O MOGODB #####
+###########################
+# MONGODB_URL = "localhost:27017"
+# MONGODB_DB = "banco_ponto_frio"
+#
+# # Configure item pipelines
+# ITEM_PIPELINES = {
+#     'pontofrio.pipelines.PontofrioPipeline',
+# }
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'kabum (+http://www.yourdomain.com)'
-
-# Obey robots.txt rules
-# ROBOTSTXT_OBEY = True
+#USER_AGENT = 'pontofrio (+http://www.yourdomain.com)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+#CONCURRENT_REQUESTS=32
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 0.5
+#DOWNLOAD_DELAY=3
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+#CONCURRENT_REQUESTS_PER_DOMAIN=16
+#CONCURRENT_REQUESTS_PER_IP=16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+#COOKIES_ENABLED=False
 
 # Disable Telnet Console (enabled by default)
-# TELNETCONSOLE_ENABLED = False
+#TELNETCONSOLE_ENABLED=False
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
@@ -219,79 +270,90 @@ ITEM_PIPELINES = {
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'kabum.middlewares.KabumSpiderMiddleware': 543,
+#    'pontofrio.middlewares.MyCustomSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'kabum.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'pontofrio.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
-#    'scrapy.extensions.telnet.TelnetConsole': None,
+#    'scrapy.telnet.TelnetConsole': None,
 #}
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'kabum.pipelines.KabumPipeline': 300,
+#    'pontofrio.pipelines.SomePipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+# NOTE: AutoThrottle will honour the standard settings for concurrency and delay
+#AUTOTHROTTLE_ENABLED=True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+#AUTOTHROTTLE_START_DELAY=5
 # The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
-# The average number of requests Scrapy should be sending in parallel to
-# each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+#AUTOTHROTTLE_MAX_DELAY=60
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+#AUTOTHROTTLE_DEBUG=False
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
-#HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
-#HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_ENABLED=True
+#HTTPCACHE_EXPIRATION_SECS=0
+#HTTPCACHE_DIR='httpcache'
+#HTTPCACHE_IGNORE_HTTP_CODES=[]
+#HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
 ```
 
-#### Arquivo: [/kabum/items.py](../master/kabum/items.py)
+#### Arquivo: [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/items.py)
 ```python
 # -*- coding: utf-8 -*-
+
+# Define here the models for your scraped items
+#
+# See documentation in:
+# http://doc.scrapy.org/en/latest/topics/items.html
+
 import scrapy
 
-#create the KabumItem class with item's attributes to save in database
-class KabumItem(scrapy.Item):
-    name = scrapy.Field()
-    price = scrapy.Field()
-    price_cash = scrapy.Field()
+class PontofrioItem(scrapy.Item):
+    fotos = scrapy.Field()
     url = scrapy.Field()
-    data_id = scrapy.Field()
-    status = scrapy.Field()
-    url_photo = scrapy.Field()
+    endereco = scrapy.Field()
+    titulo = scrapy.Field()
+    preco = scrapy.Field()
+    precoRegular = scrapy.Field()
+    prestacao = scrapy.Field()
     stars = scrapy.Field()
 ```
  
  
 #### Tempo gasto
-  * Estudando:
-  * Implementando:
-
+  * Estudando: 15
+  * Implementando: 11
+  * Ajustando: 6
+	
 
 #### Programas utilizados
   * [XPath Helper](https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl)
+  * [Scraper](https://chrome.google.com/webstore/detail/scraper/mbigbapnjcgaffohmbkdlecaccepngjd)
   * [RethinkDB](https://www.rethinkdb.com/docs/install/)
+  * [MongoDB](https://docs.mongodb.com/master/tutorial/install-mongodb-on-amazon/?_ga=1.85742745.1270707873.1490984659)
   
-  
+
 #### Referências
+  * [Scrapy 0.24 documentation [ENG]](https://doc.scrapy.org/en/0.24/)
   * [Guia de 10min com RethinkDB e Python [ENG]](https://www.rethinkdb.com/docs/guide/python/)
+  * [MongoDB Documentation [ENG]](https://docs.mongodb.com/)
   * [Parte I - Configurando e rodando o Scrapy](http://www.gilenofilho.com.br/usando-o-scrapy-e-o-rethinkdb-para-capturar-e-armazenar-dados-imobiliarios-parte-i/)
   * [Parte II - Instalando, configurando e armazenando os dados no Rethinkdb](http://www.gilenofilho.com.br/usando-o-scrapy-e-o-rethinkdb-para-capturar-e-armazenar-dados-imobiliarios-parte-ii/)
+[Parte II - Instalando, configurando e armazenando os dados no Rethinkdb](http://www.gilenofilho.com.br/usando-o-scrapy-e-o-rethinkdb-para-capturar-e-armazenar-dados-imobiliarios-parte-iii/)
   * [XPath Tutorial [ENG]](https://www.w3schools.com/xml/xpath_intro.asp)
+  * [Web Scraping with Python[ENG]](http://pdf.th7.cn/down/files/1603/Web%20Scraping%20with%20Python.pdf)
+	
