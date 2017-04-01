@@ -19,7 +19,7 @@ class PontofrioSpider(spider.Spider):
         return [FormRequest.from_response(response,
                                           formdata={'Email': 'wellingtonluiz123456@gmail.com', 'Password': '123456'},
                                           callback=self.after_login)]
-
+    #Depois de fazer o Login
     def after_login(self, response):
         # Verifique o login bem-sucedido antes de continuar
         if "authentication failed" in response.body:

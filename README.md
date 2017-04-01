@@ -6,20 +6,19 @@
 
 ```
 $ rethinkdb
-$ git clone https://github.com/leuthier/kabum-scrapy
+$ git clone https://github.com/wellington16/PontoFrio-Scrapy
 $ pip install -r requirements.txt
 $ cd kabum-scrapy
-$ scrapy crawl kb -o computers.json
-$ scrapy runspider login.py
+$ scrapy crawl spider_pontofrio -o resultado.json -t json
 ``` 
 
 #### Índice
-  * [Objetivos](https://github.com/leuthier/kabum-scrapy/blob/master/README.md#objetivos)
+  * [Objetivos](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#objetivos)
   * Arquivos:
-      * [/kabum/spiders/kb.py](https://github.com/leuthier/kabum-scrapy#arquivo-kabumspiderskbpy)
-      * [/kabum/pipelines.py](https://github.com/leuthier/kabum-scrapy#arquivo-kabumpipelinespy)
-      * [/kabum/settings.py](https://github.com/leuthier/kabum-scrapy#arquivo-kabumsettingspy)
-      * [/kabum/items.py](https://github.com/leuthier/kabum-scrapy#arquivo-kabumitemspy)
+      * [pontoFrio.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/spiders/pontoFrio.py)
+      * [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/pipelines.py)
+      * [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/settings.py)
+      * [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/items.py)
   * [Tempo gasto](https://github.com/leuthier/kabum-scrapy/blob/master/README.md#tempo-gasto)
   * [Programas utilizados](https://github.com/leuthier/kabum-scrapy/blob/master/README.md#programas-utilizados)
   * [Referências](https://github.com/leuthier/kabum-scrapy#referências)
@@ -34,94 +33,88 @@ $ scrapy runspider login.py
 - [x] Utilização de logs para sinalizar ocorrências durante o scraping
 
 
-#### Arquivo: [/kabum/spiders/kb.py](../master/kabum/spiders/kb.py)
+#### Arquivo: [/kabum/spiders/kb.py](..master/PontoFrio-Scrapy/pontofrio/pontoFrio.py)
 ```python 
 # -*- coding: utf-8 -*-
-import scrapy
+import scrapy as spider
 import logging
-from kabum.items import KabumItem
-from kabum.login import LoginSpider
-from scrapy.item import Item, Field
 from scrapy.http import FormRequest
+from pontofrio.items import PontofrioItem
 from scrapy.utils.response import open_in_browser
+from scrapy.selector import Selector
 
-class KbSpider(scrapy.Spider):
-    name = "kb"
 
-    def start_requests(self):
-        logar = LoginSpider()
-        allowed_domains = ["kabum.com.br"]
-        urls = [
-            'http://www.kabum.com.br/computadores/computadores/'
-        ]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+class PontofrioSpider(spider.Spider):
+    name = "spider_pontofrio"
+    allowed_domains = ["pontofrio.com.br"]
+    start_urls = [
+        "https://carrinho.pontofrio.com.br/Checkout?ReturnUrl=http://www.pontofrio.com.br#login"
+    ]
 
+    # fazendo o Login
     def parse(self, response):
-        computers = response.xpath('//div[@class="listagem-box"]')
-            
-        ## the computer's list index start at 3
-        start = 3
-        for computer in computers:
-            item = KabumItem()
-            
-            item['name'] = computer.xpath(
-                'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[2]/span[1]//text())').extract()[0]
+        return [FormRequest.from_response(response,
+                                          formdata={'Email': 'wellingtonluiz123456@gmail.com', 'Password': '123456'},
+                                          callback=self.after_login)]
 
-            ## Sometimes computer's prices doesn't have "De R$ xx,xx por..." at beginning, we check below
-            price_query = computer.xpath(
-                'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[3]/div[2]//text())').extract()[0]
-            if "EM" in price_query:
-                item['price'] = computer.xpath(
-                    'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[3]/div[1]//text())').extract()[0]
-            else:
-                item['price'] = price_query
-                
-            price_cash_query = computer.xpath(
-                    'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[3]/div[4]//text())').extract()[0]
-            if "%" in price_cash_query:
-                item['price_cash'] = computer.xpath(
-                    'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[3]/div[3]//text())').extract()[0]
-            else:
-                item['price_cash'] = price_cash_query
- 
-            item['url'] = computer.xpath(
-              'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[2]/span//@href)').extract()[0]
-            item['data_id'] = computer.xpath(
-              'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[2]/span//@data-id)').extract()[0]
+    def after_login(self, response):
+        # Verifique o login bem-sucedido antes de continuar
+        if "authentication failed" in response.body:
+            logging.error("NãO FOI POSSIVEL LOGAR", level=logging.ERROR)
+            return
+        #Nós conseguimos autenticar, agora vamos pegar os dados que queremos! \o/
+        else:
+            logging.info("---------------------------------------")
+            logging.info("       LOGIN EFETUADO COM SUCESSO      ")
+            logging.info("---------------------------------------")
+            open_in_browser(response)
+            return spider.Request(url="http://www.pontofrio.com.br/Informatica/Computadores/?Filtro=C56_C58",
+                                  callback=self.parse_detail)
 
-            ## Verifies thats computer is available to purchase            
-            purchase_status = computer.xpath(
-                'normalize-space(//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[4]/div/a/img/@src)').extract()[0]
-            if "_off" in purchase_status:
-                item['status'] = "Indisponivel"
-            else:
-                item['status'] = "Disponivel"
+    #Pegando os dados na pagina de computadores
+    def parse_detail(self, response):
+        sel = Selector(response)
+        logging.info(response.url)
+        items = sel.xpath(
+            ('//ul[@class="vitrineProdutos"]/li/div/a/@href')
+        )
 
-            item['url_photo'] = computer.xpath(
-                '//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[1]/a/img/@src').extract()[0]
+        for item in items:
+            if item is not None:
+                elem = PontofrioItem()
+                elem['url'] = response.url
+                elem['titulo'] = response.xpath(
+                    'normalize-space(//*[@id]/div/a/strong[2]//text())'
+                ).extract()[0]
+                elem['fotos'] = response.xpath(
+                    '//*[@id]/div/a/span/img/@src').extract_first()
+                elem['preco'] = response.xpath(
+                    'normalize-space(//*[@id]/div/a/span[2]/span[2]/strong/text())'
+                ).extract()[0]
+                elem['precoRegular'] = response.xpath(
+                    'normalize-space(//*[@id]/div/a/span[2]/span[1]/strong/text())'
+                ).extract()[0]
+                elem['prestacao'] = response.xpath(
+                    'normalize-space(//*[@id]/div/a/span[2]/span[3]//text())'
+                ).extract()[0]
+                yield elem
 
-            stars = computer.xpath(
-                '//*[@id="BlocoConteudo"]/div[2]/div/div['+str(start)+']/div[2]/div/ul/li[3]/div/@class').extract()[0]
-            if stars[len(stars)-1] == "e":
-                item['stars'] = 0
-            else:
-                item['stars'] = stars[len(stars)-1]
-
-            start += 1
-            yield item
-        
-        next_pages=[]
-        #next_pages = response.xpath('//*[@id="BlocoConteudo"]/div[2]/div/div[2]/form/table/tbody/tr/td[6]/span/a/@href').extract()
-        next_pages.append("?string=&dep=04&sec=34&cat=&sub=&pagina=2&ordem=5&limite=30")
-        next_pages.append("?string=&dep=04&sec=34&cat=&sub=&pagina=3&ordem=5&limite=30")
-        for i in next_pages:
-            next_url = "http://www.kabum.com.br/computadores/computadores/"+i
-            #logging.info('NEXT_URL: '+next_url)
-            yield scrapy.Request(url=next_url, callback=self.parse)
+        next_pages = response.xpath(
+            '//*[@id="ctl00_Conteudo_ctl05_divOrdenacao"]/div[2]/ul/li[@class="next"]/a/@href'
+        )
+        #mudadno de página
+        try:
+            aux = None
+            for page in next_pages.extract():
+                if page != aux:
+                    aux = page
+                    # next_page = response.urljoin(page)
+                    logging.info('Next Page: {0}'.format(page))
+                    yield spider.Request(url=page, callback=self.parse_detail)
+        except:pass
 ```
 
-#### Arquivo: [/kabum/pipelines.py](../master/kabum/pipelines.py)
+#### Arquivo: [pipelines.py](../master/kabum/pipelines.py)
 ```python
 # -*- coding: utf-8 -*-
 
