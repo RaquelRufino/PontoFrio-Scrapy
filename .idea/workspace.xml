@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71bed9b7-3321-4a1a-8342-58fa3c937e4a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/.idea/pontofrio.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/pontofrio/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/pontofrio/items.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/pontofrio/pipelines.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/pontofrio/settings.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/pontofrio/spiders/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/pontofrio/spiders/pontoFrio.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/resultado.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/rethinkdb_data/66af87e7-576a-422b-958f-86c0b6f0afb2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/rethinkdb_data/log_file" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/rethinkdb_data/metadata" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PontoFrio-Scrapy/scrapy.cfg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,8 +20,8 @@
       <file leaf-file-name="spider-pontoFrio.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pontofrio/spiders/spider-pontoFrio.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+            <state relative-caret-position="135">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="e#24#47#0" expanded="true" />
               </folding>
@@ -581,8 +565,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pontofrio/spiders/spider-pontoFrio.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="e#24#47#0" expanded="true" />
           </folding>

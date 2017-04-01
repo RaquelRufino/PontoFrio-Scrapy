@@ -15,10 +15,10 @@ $ scrapy crawl spider_pontofrio -o resultado.json -t json
 #### Índice
   * [Objetivos](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#objetivos)
   * Arquivos:
-      * [pontoFrio.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/spiders/pontoFrio.py)
-      * [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/pipelines.py)
-      * [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/settings.py)
-      * [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/items.py)
+      * [pontoFrio.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/spiders/spider-pontoFrio.py)
+      * [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/pipelines.py)
+      * [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/settings.py)
+      * [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/items.py)
   * [Tempo gasto](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#tempo-gasto)
   * [Programas utilizados](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#programas-utilizados)
   * [Referências](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#referências)
@@ -33,7 +33,7 @@ $ scrapy crawl spider_pontofrio -o resultado.json -t json
 - [x] Utilização de logs para sinalizar ocorrências durante o scraping
 
 
-#### Arquivo: [pontoFrio.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/spiders/pontoFrio.py)
+#### Arquivo: [pontoFrio.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/spiders/spider-pontoFrio.py)
 ```python 
 # -*- coding: utf-8 -*-
 import scrapy as spider
@@ -114,7 +114,7 @@ class PontofrioSpider(spider.Spider):
         except:pass
 ```
 
-#### Arquivo: [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/pipelines.py)
+#### Arquivo: [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/pipelines.py)
 ```python
 # -*- coding: utf-8 -*-
 
@@ -200,7 +200,7 @@ class PontofrioPipeline(object):
         return item
 ```
 
-#### Arquivo: [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/settings.py)
+#### Arquivo: [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/settings.py)
 ```python
 # -*- coding: utf-8 -*-
 
@@ -311,7 +311,7 @@ ITEM_PIPELINES = { 'pontofrio.pipelines.PontofrioPipeline'}
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
 ```
 
-#### Arquivo: [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/items.py)
+#### Arquivo: [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/pontofrio/items.py)
 ```python
 # -*- coding: utf-8 -*-
 
