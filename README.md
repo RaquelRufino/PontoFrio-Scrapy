@@ -26,7 +26,7 @@ $ scrapy crawl spider_pontofrio -o resultado.json -t json
 
 #### Objetivos
 - [x] Utilização de ```xpath``` nas buscas por links
-- [x] Persistência das informações (RethinkDB, MongoDB(A configuração para o MongoDB está comentada, se retirar os comentarios e colocar para rodar em um ambiente que tenha o MongoDB instalado e iniciado ele rodará normalmente))
+- [x] Persistência das informações (RethinkDB, MongoDB (A configuração para o MongoDB estão comentadas, se retirar os comentários e colocar para rodar em um ambiente que tenha o MongoDB instalado e iniciado ele rodará normalmente, claro que vai ter que comentar as configurações do RethinkDB antes))
 - [x] Submissão de formulários
 - [x] Manipulação de querystrings
 - [x] Tratamento de paginação
