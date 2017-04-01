@@ -19,9 +19,9 @@ $ scrapy crawl spider_pontofrio -o resultado.json -t json
       * [pipelines.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/pipelines.py)
       * [settings.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/settings.py)
       * [items.py](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/PontoFrio-Scrapy/pontofrio/items.py)
-  * [Tempo gasto](https://github.com/leuthier/kabum-scrapy/blob/master/README.md#tempo-gasto)
-  * [Programas utilizados](https://github.com/leuthier/kabum-scrapy/blob/master/README.md#programas-utilizados)
-  * [Referências](https://github.com/leuthier/kabum-scrapy#referências)
+  * [Tempo gasto](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#tempo-gasto)
+  * [Programas utilizados](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#programas-utilizados)
+  * [Referências](https://github.com/wellington16/PontoFrio-Scrapy/blob/master/README.md#referências)
 
 
 #### Objetivos
