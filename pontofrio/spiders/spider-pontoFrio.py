@@ -2,13 +2,14 @@
 import scrapy as spider
 import logging
 from scrapy.http import FormRequest
-from pontofrio.items import PontofrioItem
 from scrapy.utils.response import open_in_browser
 from scrapy.selector import Selector
 
+from pontofrio.items import PontofrioItem
+
 
 class PontofrioSpider(spider.Spider):
-    name = "spider_pontofrio"
+    name = "pontofrio_full"
     allowed_domains = ["pontofrio.com.br"]
     start_urls = [
         "https://carrinho.pontofrio.com.br/Checkout?ReturnUrl=http://www.pontofrio.com.br#login"
@@ -18,9 +19,9 @@ class PontofrioSpider(spider.Spider):
     def parse(self, response):
         return [FormRequest.from_response(response,
                                           formdata={'Email': 'wellingtonluiz123456@gmail.com', 'Password': '123456'},
-                                          callback=self.after_login)]
+                                          callback=self.parse_after_login)]
     #Depois de fazer o Login
-    def after_login(self, response):
+    def parse_after_login(self, response):
         # Verifique o login bem-sucedido antes de continuar
         if "authentication failed" in response.body:
             logging.error("NãO FOI POSSIVEL LOGAR", level=logging.ERROR)
@@ -62,10 +63,10 @@ class PontofrioSpider(spider.Spider):
                 ).extract()[0]
                 yield elem
 
+        # Mudadno de página
         next_pages = response.xpath(
             '//*[@id="ctl00_Conteudo_ctl05_divOrdenacao"]/div[2]/ul/li[@class="next"]/a/@href'
         )
-        #mudadno de página
         try:
             aux = None
             for page in next_pages.extract():
