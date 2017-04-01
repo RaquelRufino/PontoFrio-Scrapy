@@ -1,4 +1,4 @@
-#### Utilizando Scrapy para extrair dados do site Pontofrio
+#### Utilizando Scrapy para extrair dados do Pontofrio
 #### Site: http://www.pontofrio.com.br/
 
 #### Tutorial
