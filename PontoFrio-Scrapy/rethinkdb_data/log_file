@@ -1,0 +1,32 @@
+2017-03-31T16:11:39.720124360 0.169481s notice: Recursively removing directory /home/wellington/Projetos/Scraping/pontofrio/rethinkdb_data/tmp
+2017-03-31T16:11:39.760909793 0.210266s notice: Initializing directory /home/wellington/Projetos/Scraping/pontofrio/rethinkdb_data
+2017-03-31T16:11:39.761008313 0.210365s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/wellington/Projetos/Scraping/pontofrio/rethinkdb_data' did not already exist or is empty.)
+2017-03-31T16:11:39.761071004 0.210427s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2017-03-31T16:11:39.763510947 0.212870s notice: Running on Linux 4.4.0-66-generic x86_64
+2017-03-31T16:11:39.763573189 0.212929s notice: Loading data from directory /home/wellington/Projetos/Scraping/pontofrio/rethinkdb_data
+2017-03-31T16:11:40.080807912 0.530164s info: Automatically using cache size of 1489 MB
+2017-03-31T16:11:40.081546564 0.530903s notice: Listening for intracluster connections on port 29015
+2017-03-31T16:11:40.110181354 0.559538s notice: Listening for client driver connections on port 28015
+2017-03-31T16:11:40.110303928 0.559660s notice: Listening for administrative HTTP connections on port 8080
+2017-03-31T16:11:40.110308531 0.559665s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-03-31T16:11:40.110310332 0.559666s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-03-31T16:11:40.110313082 0.559669s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-03-31T16:11:40.110314622 0.559671s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-03-31T16:11:40.110317454 0.559674s notice: Server ready, "wellington_Inspiron_5558_cm7" d84a87d1-0d88-469f-8c4d-de23a5ca9175
+2017-03-31T16:14:25.084254187 165.533611s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Starting a new Raft election for term 1.
+2017-03-31T16:14:25.084841419 165.534198s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Added replica on this server.
+2017-03-31T16:14:25.205673192 165.655030s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: This server is Raft leader for term 1. Latest log index is 0.
+2017-03-31T19:39:35.180784057 0.342942s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2017-03-31T19:39:35.206579328 0.368740s notice: Running on Linux 4.4.0-66-generic x86_64
+2017-03-31T19:39:35.206637159 0.368795s notice: Loading data from directory /home/wellington/Projetos/Scraping/pontofrio/rethinkdb_data
+2017-03-31T19:39:35.426410483 0.588568s info: Automatically using cache size of 1982 MB
+2017-03-31T19:39:35.427455052 0.589613s notice: Listening for intracluster connections on port 29015
+2017-03-31T19:39:35.763228385 0.925386s notice: Listening for client driver connections on port 28015
+2017-03-31T19:39:35.763659442 0.925817s notice: Listening for administrative HTTP connections on port 8080
+2017-03-31T19:39:35.763662591 0.925820s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-03-31T19:39:35.763672852 0.925830s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-03-31T19:39:35.763675217 0.925833s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-03-31T19:39:35.763676786 0.925834s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-03-31T19:39:35.763678558 0.925836s notice: Server ready, "wellington_Inspiron_5558_cm7" d84a87d1-0d88-469f-8c4d-de23a5ca9175
+2017-03-31T19:39:37.047527674 2.209685s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Starting a new Raft election for term 2.
+2017-03-31T19:39:37.110167308 2.272325s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: This server is Raft leader for term 2. Latest log index is 3.
