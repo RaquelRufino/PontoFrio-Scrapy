@@ -8,7 +8,7 @@
 $ rethinkdb
 $ git clone https://github.com/wellington16/PontoFrio-Scrapy
 $ pip install -r requirements.txt
-$ cd kabum-scrapy
+$ cd PontoFrio-Scrapy
 $ scrapy crawl spider_pontofrio -o resultado.json -t json
 ``` 
 
