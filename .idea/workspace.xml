@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71bed9b7-3321-4a1a-8342-58fa3c937e4a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pf.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resultado.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rethinkdb_data/66af87e7-576a-422b-958f-86c0b6f0afb2" afterPath="$PROJECT_DIR$/rethinkdb_data/66af87e7-576a-422b-958f-86c0b6f0afb2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rethinkdb_data/metadata" afterPath="$PROJECT_DIR$/rethinkdb_data/metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pontofrio/items.py" afterPath="$PROJECT_DIR$/pontofrio/items.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pontofrio/settings.py" afterPath="$PROJECT_DIR$/pontofrio/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pontofrio/spiders/spider-pontoFrio.py" afterPath="$PROJECT_DIR$/pontofrio/spiders/spider-pontoFrio.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rethinkdb_data/log_file" afterPath="$PROJECT_DIR$/rethinkdb_data/log_file" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +32,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2658">
-              <caret line="156" column="21" lean-forward="false" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+            <state relative-caret-position="312">
+              <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -547,8 +538,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2658">
-          <caret line="156" column="21" lean-forward="false" selection-start-line="156" selection-start-column="21" selection-end-line="156" selection-end-column="21" />
+        <state relative-caret-position="312">
+          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
           <folding />
         </state>
       </provider>
