@@ -1,0 +1,18 @@
+2017-04-01T00:48:27.870337004 0.162181s notice: Recursively removing directory /home/wellington/Projetos/PontoFrio-Scrapy/pontofrio/rethinkdb_data/tmp
+2017-04-01T00:48:27.906928730 0.198772s notice: Initializing directory /home/wellington/Projetos/PontoFrio-Scrapy/pontofrio/rethinkdb_data
+2017-04-01T00:48:27.907036373 0.198879s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/wellington/Projetos/PontoFrio-Scrapy/pontofrio/rethinkdb_data' did not already exist or is empty.)
+2017-04-01T00:48:27.907096788 0.198940s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2017-04-01T00:48:27.909513341 0.201358s notice: Running on Linux 4.4.0-71-generic x86_64
+2017-04-01T00:48:27.909564578 0.201408s notice: Loading data from directory /home/wellington/Projetos/PontoFrio-Scrapy/pontofrio/rethinkdb_data
+2017-04-01T00:48:28.314590082 0.606433s info: Automatically using cache size of 2468 MB
+2017-04-01T00:48:28.315516997 0.607360s notice: Listening for intracluster connections on port 29015
+2017-04-01T00:48:28.367507282 0.659351s notice: Listening for client driver connections on port 28015
+2017-04-01T00:48:28.367647292 0.659490s notice: Listening for administrative HTTP connections on port 8080
+2017-04-01T00:48:28.367649462 0.659492s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-01T00:48:28.367649947 0.659493s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-01T00:48:28.367653062 0.659496s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-01T00:48:28.367654638 0.659498s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-04-01T00:48:28.367657270 0.659501s notice: Server ready, "wellington_Inspiron_5558_zoj" 86fa279c-6d14-4a8c-afa4-6921e60858c0
+2017-04-01T00:49:25.556614149 57.848457s info: Table a135c94e-606a-4351-a251-5315f50236b7: Starting a new Raft election for term 1.
+2017-04-01T00:49:25.557313898 57.849157s info: Table a135c94e-606a-4351-a251-5315f50236b7: Added replica on this server.
+2017-04-01T00:49:25.677860188 57.969703s info: Table a135c94e-606a-4351-a251-5315f50236b7: This server is Raft leader for term 1. Latest log index is 0.

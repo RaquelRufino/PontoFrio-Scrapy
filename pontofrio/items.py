@@ -10,8 +10,7 @@ import scrapy
 class PontofrioItem(scrapy.Item):
     fotos = scrapy.Field()
     url = scrapy.Field()
-    endereco = scrapy.Field()
     titulo = scrapy.Field()
-    preco = scrapy.Field()
-    precoRegular = scrapy.Field()
+    precoAvista = scrapy.Field()
+    precoPrazo = scrapy.Field()
     prestacao = scrapy.Field()

@@ -30,3 +30,17 @@
 2017-03-31T19:39:35.763678558 0.925836s notice: Server ready, "wellington_Inspiron_5558_cm7" d84a87d1-0d88-469f-8c4d-de23a5ca9175
 2017-03-31T19:39:37.047527674 2.209685s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Starting a new Raft election for term 2.
 2017-03-31T19:39:37.110167308 2.272325s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: This server is Raft leader for term 2. Latest log index is 3.
+2017-04-01T14:06:18.084348430 0.231844s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2017-04-01T14:06:18.109737096 0.257235s notice: Running on Linux 4.4.0-71-generic x86_64
+2017-04-01T14:06:18.109813252 0.257309s notice: Loading data from directory /home/wellington/Projetos/PontoFrio-Scrapy/rethinkdb_data
+2017-04-01T14:06:18.297143941 0.444640s info: Automatically using cache size of 1951 MB
+2017-04-01T14:06:18.298061643 0.445557s notice: Listening for intracluster connections on port 29015
+2017-04-01T14:06:18.700058692 0.847554s notice: Listening for client driver connections on port 28015
+2017-04-01T14:06:18.700274528 0.847770s notice: Listening for administrative HTTP connections on port 8080
+2017-04-01T14:06:18.700277230 0.847773s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-01T14:06:18.700279084 0.847774s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-01T14:06:18.700286266 0.847782s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-01T14:06:18.700288783 0.847784s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-04-01T14:06:18.700291248 0.847787s notice: Server ready, "wellington_Inspiron_5558_cm7" d84a87d1-0d88-469f-8c4d-de23a5ca9175
+2017-04-01T14:06:20.327721566 2.475217s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Starting a new Raft election for term 3.
+2017-04-01T14:06:20.361918729 2.509415s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: This server is Raft leader for term 3. Latest log index is 7.

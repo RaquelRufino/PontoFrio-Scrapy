@@ -22,6 +22,9 @@ NEWSPIDER_MODULE = 'pontofrio.spiders'
 
 RETHINKDB = { 'table_name': 'items', 'db': 'banco_ponto_frio' }
 ITEM_PIPELINES = { 'pontofrio.pipelines.PontofrioPipeline'}
+DOWNLOAD_HANDLERS = {
+  's3': None,
+}
 
 
 
