@@ -44,3 +44,25 @@
 2017-04-01T14:06:18.700291248 0.847787s notice: Server ready, "wellington_Inspiron_5558_cm7" d84a87d1-0d88-469f-8c4d-de23a5ca9175
 2017-04-01T14:06:20.327721566 2.475217s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Starting a new Raft election for term 3.
 2017-04-01T14:06:20.361918729 2.509415s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: This server is Raft leader for term 3. Latest log index is 7.
+2017-04-03T13:38:02.450031611 0.265333s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2017-04-03T13:38:02.480995837 0.296299s notice: Running on Linux 4.4.0-71-generic x86_64
+2017-04-03T13:38:02.481045866 0.296347s notice: Loading data from directory /home/wellington/Projetos/PontoFrio-Scrapy/rethinkdb_data
+2017-04-03T13:38:03.149644146 0.964945s info: Automatically using cache size of 2139 MB
+2017-04-03T13:38:03.150464508 0.965765s notice: Listening for intracluster connections on port 29015
+2017-04-03T13:38:03.475675599 1.290977s notice: Listening for client driver connections on port 28015
+2017-04-03T13:38:03.476194240 1.291496s notice: Listening for administrative HTTP connections on port 8080
+2017-04-03T13:38:03.476205499 1.291506s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-03T13:38:03.476207369 1.291508s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-03T13:38:03.476208996 1.291510s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2017-04-03T13:38:03.476210726 1.291511s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-04-03T13:38:03.476217587 1.291518s notice: Server ready, "wellington_Inspiron_5558_cm7" d84a87d1-0d88-469f-8c4d-de23a5ca9175
+2017-04-03T13:38:04.693754668 2.509056s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: Starting a new Raft election for term 4.
+2017-04-03T13:38:04.727462311 2.542763s info: Table 66af87e7-576a-422b-958f-86c0b6f0afb2: This server is Raft leader for term 4. Latest log index is 11.
+2017-04-03T14:35:20.862310429 3438.677612s info: Table a4feb648-e568-4d81-bb83-a337e9061ac9: Added replica on this server.
+2017-04-03T14:35:20.862360328 3438.677661s info: Table a4feb648-e568-4d81-bb83-a337e9061ac9: Starting a new Raft election for term 1.
+2017-04-03T14:35:20.889903703 3438.705205s info: Table a4feb648-e568-4d81-bb83-a337e9061ac9: This server is Raft leader for term 1. Latest log index is 0.
+2017-04-03T14:37:57.515703487 3595.331004s notice: Removing file /home/wellington/Projetos/PontoFrio-Scrapy/rethinkdb_data/a4feb648-e568-4d81-bb83-a337e9061ac9
+2017-04-03T14:37:57.515709987 3595.331011s info: Table a4feb648-e568-4d81-bb83-a337e9061ac9: Deleted the table.
+2017-04-03T14:38:28.436119303 3626.251420s info: Table 74cb16db-0213-429f-8ebf-fef0093c8d08: Starting a new Raft election for term 1.
+2017-04-03T14:38:28.436268652 3626.251570s info: Table 74cb16db-0213-429f-8ebf-fef0093c8d08: Added replica on this server.
+2017-04-03T14:38:28.460196023 3626.275497s info: Table 74cb16db-0213-429f-8ebf-fef0093c8d08: This server is Raft leader for term 1. Latest log index is 0.
