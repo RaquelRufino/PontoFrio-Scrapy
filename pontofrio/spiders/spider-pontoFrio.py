@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 import scrapy as spider
 import logging
 from scrapy.utils.response import open_in_browser
@@ -20,6 +20,7 @@ from scrapy.spiders.init import Spider
 
 class PontofrioSpider(Spider):
     name = "pontofrio_full"
+
     allowed_domains = ["pontofrio.com.br"]
     start_urls = [
         "https://carrinho.pontofrio.com.br/Checkout?ReturnUrl=http://www.pontofrio.com.br#login"
@@ -50,70 +51,69 @@ class PontofrioSpider(Spider):
             logging.info("       LOGIN EFETUADO COM SUCESSO      ")
             logging.info("---------------------------------------")
             open_in_browser(response)
-            return spider.Request(url="http://www.pontofrio.com.br/Informatica/Computadores/?Filtro=C56_C58",
-                               callback=self.parse_detail)
+            yield spider.Request(url="http://www.pontofrio.com.br/Informatica/Computadores/?Filtro=C56_C58",
+                               callback=self.parse_Scrapy)
 
     #Pegando os dados na pagina de computadores
-    def parse_detail(self, response):
+    def parse_Scrapy(self, response):
         sel = Selector(response)
-        logging.info(response.url)
         items = response.xpath(
             ('//ul[@class="vitrineProdutos"]/li/div/a/@href')
-        )
-        proxima = response.xpath('//*[@id="ctl00_Conteudo_ctl04_divBuscaResultadoInferior"]/div/ul/li[@class="next"]//@href')
+        ).extract()
 
         for item in items:
-            if item is not None:
-                elem = PontofrioItem()
-                # elem['url'] = response.url
-                elem['titulo'] = response.xpath(
-                    'normalize-space(//*[@id]/div/a/strong[2]//text())'
-                ).extract()[0]
-                elem['fotos'] = response.xpath(
-                    '//*[@id]/div/a/span/img/@src').extract_first()
+            next_item = response.urljoin(item)
+            logging.info(next_item)
 
-                preco = response.xpath(
-                    'normalize-space(//*[@id]/div/a/span[2]/span[2]/strong/text())'
-                ).extract()[0]
-                if 'R$' in preco:
-                    elem['precoAvista'] = preco
-                else:
-                    elem['precoAvista'] = "Indiponivel"
+            yield spider.Request(next_item, callback=self.parse_items)
 
-                precoRegular= response.xpath(
-                    'normalize-space(//*[@id]/div/a/span[2]/span[1]/strong/text())'
-                ).extract()[0]
-                if  'R$' in precoRegular:
-                    elem['precoPrazo']= precoRegular
-                else:
-                    elem['precoPrazo']= "Indiponivel"
-
-                pretacao =  response.xpath(
-                    'normalize-space(//*[@id]/div/a/span[2]/span[3]//text())'
-                ).extract()[0]
-                if  'R$'in pretacao:
-                    elem['prestacao'] = pretacao
-                else:
-                    elem['prestacao'] ="Indiponivel"
-
-
-                yield elem
 
         # Mudadno de página
-
-
         next_pages = sel.xpath(
             '//*[@id="ctl00_Conteudo_ctl05_divOrdenacao"]/div[2]/ul/li[@class="next"]/a/@href'
-            # '//div[3]/div[1]/div[2]/ul/li/a/@href'
         )
         try:
-            yield spider.Request(url = next_pages.extract()[0], callback = self.parse_detail)
+            # pass
+            yield spider.Request(url = next_pages.extract()[0], callback = self.parse_Scrapy, errback= self.parse_error(response))
         except:
-            print('GAMER OVER!!')
-        # try:
+            logging.info('GAMER OVER!!')
+
+    def parse_items(self,response):
+
+        elem = PontofrioItem()
+        elem['url'] = response.xpath('//*[@id]/div/a/@href').extract_first()
+        elem['titulo'] = response.xpath(
+            'normalize-space(//*[@id="ctl00_Conteudo_ctl36_Content"]/div)'
+        ).extract()[0]
         #
-        #     # for page in next_pages.extract()[0]:
-        #     #         # next_page = response.urljoin(page)
-        #     #         # logging.info('Next Page: {0}'.format(page))
-        #     #         yield spider.Request(url=page, callback=self.parse_detail)
-        # except:pass
+        elem['codigo'] = response.xpath('///*[@id="ctl00_Conteudo_upMasterProdutoBasico"]/div[2]/div/span[1]/text()').extract_first()
+        elem['fotos'] = response.xpath(
+            '//*[@id="ctl00_Conteudo_ctl07_prodImagens_imgFullImage"]//@src').extract()[0]
+
+        preco = response.xpath(
+            'normalize-space(//*[@id="ctl00_Conteudo_ctl01_precoPorValue"])'
+        ).extract()[0]
+        if 'R$' in preco:
+            elem['precoAvista'] = preco
+        else:
+            elem['precoAvista'] = "Indiponivel"
+
+        precoRegular = response.xpath(
+            'normalize-space(//*[@id="ctl00_Conteudo_ctl01_precoDeValue"])'
+        ).extract()[0]
+        if 'R$' in precoRegular:
+            elem['precoPrazo'] = precoRegular
+        else:
+            elem['precoPrazo'] = "Indiponivel"
+
+        pretacao = response.xpath(
+            'normalize-space(//*[@id="ctl00_Conteudo_ctl05_divParcCartaoOutrosCartoes"])'
+        ).extract()[0]
+        if 'R$' in pretacao:
+            elem['prestacao'] = pretacao
+        else:
+            elem['prestacao'] = "Indiponivel"
+        yield elem
+
+    def parse_error(self, failure):
+        logging.error('Nao foi possivel: {}'.format(failure.url))

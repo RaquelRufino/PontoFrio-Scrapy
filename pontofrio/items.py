@@ -6,10 +6,10 @@
 # http://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
-
 class PontofrioItem(scrapy.Item):
     fotos = scrapy.Field()
     url = scrapy.Field()
+    codigo = scrapy.Field()
     titulo = scrapy.Field()
     precoAvista = scrapy.Field()
     precoPrazo = scrapy.Field()

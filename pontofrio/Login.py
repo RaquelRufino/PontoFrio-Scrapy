@@ -6,6 +6,9 @@ import logging
 from scrapy.spiders import Spider
 from scrapy.utils.response import open_in_browser
 
+
+# http://selenium-python.readthedocs.io/faq.html
+
 #Autor: Wellington Luiz
 '''
     UNIVERSIDADE FEDERAL RURAL DE PERNAMBUCO - UFRPE
