@@ -27,7 +27,7 @@ $ scrapy crawl pontofrio_full -o resultado.json -t json
 
 #### Objetivos
 - [x] Utilização de ```xpath``` nas buscas por links
-- [x] Persistência das informações (RethinkDB, MongoDB (A configuração para o MongoDB estão comentadas, se retirar os comentários e colocar para rodar em um ambiente que tenha o MongoDB instalado e iniciado ele rodará normalmente, claro que vai ter que comentar as configurações do RethinkDB antes))
+- [x] Persistência das informações (Para persistir foi usado RethinkDB como padrão, mas tamném foi testado no MongoDB e PostgreSQL)
 - [x] Submissão de formulários
 - [x] Manipulação de querystrings
 - [x] Tratamento de paginação
@@ -434,6 +434,7 @@ class LoginSpider(Spider):
   * [Scraper](https://chrome.google.com/webstore/detail/scraper/mbigbapnjcgaffohmbkdlecaccepngjd)
   * [RethinkDB](https://www.rethinkdb.com/docs/install/)
   * [MongoDB](https://docs.mongodb.com/master/tutorial/install-mongodb-on-amazon/?_ga=1.85742745.1270707873.1490984659)
+  * [PostgreSQL](https://www.postgresql.org/download/linux/)
   
 
 #### Referências
